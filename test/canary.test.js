@@ -1,5 +1,5 @@
-/* eslint-env node, mocha, jquery, browser */
-const { expect } = require('chai').expect;
+/* eslint-env node, mocha, jquery, browser, chai */
+const { expect } = require('chai');
 
 describe('canary test', () => {
   // A "canary" test is one we set up to always pass
