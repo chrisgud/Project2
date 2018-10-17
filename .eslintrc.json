@@ -5,5 +5,12 @@
         "node": true,
         "jquery": true,
         "mocha": true
+    },
+    "plugins": [
+        "chai-friendly"
+    ],
+    "rules": {
+        "no-unsed-expressions": 0,
+        "chai-friendly/no-used-expressions": 2
     }
 }
