@@ -32,7 +32,7 @@ const API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-const refreshExamples = function () {
+const refreshExamples = () => {
   API.getExamples().then((data) => {
     const $examples = data.map((example) => {
       const $a = $('<a>')
@@ -62,16 +62,16 @@ const refreshExamples = function () {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-const handleFormSubmit = function (event) {
+const handleFormSubmit = (event) => {
   event.preventDefault();
 
   const example = {
     text: $exampleText.val().trim(),
     description: $exampleDescription.val().trim(),
   };
-
+  // Alerts are terrible but I'm lazy about changing this placeholder
   if (!(example.text && example.description)) {
-    alert('You must enter an example text and description!');
+    alert('You must enter an example text and description!'); //eslint-disable-line
     return;
   }
 
@@ -85,7 +85,7 @@ const handleFormSubmit = function (event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-const handleDeleteBtnClick = function () {
+const handleDeleteBtnClick = () => {
   const idToDelete = $(this)
     .parent()
     .attr('data-id');
