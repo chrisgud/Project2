@@ -1,4 +1,4 @@
-/* eslint-env node, mocha, jquery, browser, chai */
+/* eslint-env mocha */
 const { expect } = require('chai');
 
 describe('canary test', () => {
