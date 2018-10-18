@@ -1,16 +1,10 @@
 {
   "development": {
-    "username": "chris",
-    "password": "mypass",
-    "database": "budgetDB",
     "host": "localhost",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "test": {
-    "username": "chris",
-    "password": "mypass",
-    "database": "budgetdb",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false,
