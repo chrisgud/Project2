@@ -2,9 +2,12 @@
   line-height: 2.5;
 }
 body {
-
+background-image: url("/img/soccer_field.webp"); opacity: 0.7;
 };
 
-h1{
-
+#borderBar {
+background-color: black;
+height: 100px;
+font: white;
+font-family: Arial, Helvetica, sans-serif 
 };
