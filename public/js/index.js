@@ -1,4 +1,3 @@
-/* eslint-env node, jquery, browser */
 // Get references to page elements
 const $exampleText = $('#example-text');
 const $exampleDescription = $('#example-description');
