@@ -5,7 +5,7 @@ module.exports = (app) => {
   app.get('/', (req, res) => {
     db.Example.findAll({}).then((dbExamples) => {
       res.render('index', {
-        msg: 'Welcome!',
+        msg: 'App Name TBD!',
         examples: dbExamples,
       });
     });
