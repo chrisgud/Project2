@@ -1,9 +1,11 @@
 /* eslint-env node, jquery, browser */
 // Get references to page elements
-const $exampleText = $('#example-text');
-const $exampleDescription = $('#example-description');
-const $submitBtn = $('#submit');
-const $exampleList = $('#example-list');
+// Reference to create new bill with button
+const $newbill = $('#newbill');
+// Reference for the div containing the list of bills from the DB
+const $bills = $('#bills');
+// Reference for a delete bill option
+const $deletebill = $('#deletebill');
 
 // The API object contains methods for each kind of request we'll make
 const API = {
