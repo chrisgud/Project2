@@ -1,35 +1,41 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <div class="borderBar">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
+  <div id="home">
+    <div class="container">
+      <div class="row">
+        <div class="nav-wrapper">
+          <h1 id="red">App Name TBD</h1>
         </div>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+      </div>
+      <div class="row">
+
+        <!-- ------------- Div for image and total-->
+        <div class="col s5">
+          <div class="pig">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC44KA0ytm_CRwz1Te_iJKaWk9juM9dvnzJMvmpd5TYGP88Yrq">
+
+          </div>
+          <div class="total">
+            <div class="input-field">
+              <input placeholder="Monthly Income" id="monthly_income" type="text">
+              <label for="monthly_income">Monthly Income</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
+        </div>
+        <!-- --------- Empty Div for spacing-->
+        <div class="col s2"></div>
+        <!-- -------------- Div for the expenses and bills-->
+        <div class="col s5">
+
+          <header>
+            <h4>Expenses and Bills</h4>
+          </header>
+          <div class="bills">
+            <ul>
+              {{#each ###}}
+              <div></div>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>

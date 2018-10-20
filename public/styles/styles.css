@@ -1,5 +1,28 @@
-.list-group-item {
-  line-height: 2.5;
+.bills {
+  border: 2px groove red;
+  border-radius: 10px;
+  box-shadow: 10px 10px grey;
+}
+
+.total,
+#monthly_income {
+  text-align: center;
+}
+
+.total {
+  margin-top: 100px;
+}
+
+body {
+  text-align: center;
+}
+
+button {
+  margin-top: 20px;
+}
+
+.input-field input[type="text"]:focus + label {
+  color: black !important;
 }
 body {
 background-image: url("/img/soccer_field.webp"); opacity: 0.7;
