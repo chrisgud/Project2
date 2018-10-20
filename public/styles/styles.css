@@ -24,3 +24,13 @@ button {
 .input-field input[type="text"]:focus + label {
   color: black !important;
 }
+body {
+background-image: url("/img/soccer_field.webp"); opacity: 0.7;
+};
+
+#borderBar {
+background-color: black;
+height: 100px;
+font: white;
+font-family: Arial, Helvetica, sans-serif 
+};
