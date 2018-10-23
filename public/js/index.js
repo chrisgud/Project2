@@ -6,6 +6,8 @@ const $newbill = $('#newbill');
 const $bills = $('#bills');
 // Reference for a delete bill option
 const $deletebill = $('#deletebill');
+// reference for an update bill amount option
+const $updatebill = $('#updatebill');
 
 // The API object contains methods for each kind of request we'll make
 const API = {
