@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const budget = sequelize.define('budget', {
 
     //total monthly income
-    monthly_icome: {
+    monthly_income: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
