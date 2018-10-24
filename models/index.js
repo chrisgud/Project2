@@ -14,8 +14,8 @@ if (config.use_env_variable) {
 } else if(process.env.NODE_ENV === 'test') {
   sequelize = new Sequelize(
     "testdb",
-    "travis",
-    null,
+    process.env.LOCAL_USER || "travis",
+    process.env.LOCAL_PWD || null,
     config,
   );
 } else {

@@ -11,25 +11,25 @@ const $enterBill = $('#enter-bill');
 
 // The API object contains methods for each kind of request we'll make
 const API = {
-  saveExample(example) {
+  saveExample(item) {
     return $.ajax({
       headers: {
         'Content-Type': 'application/json',
       },
       type: 'POST',
-      url: 'api/examples',
-      data: JSON.stringify(example),
+      url: 'api/budget',
+      data: JSON.stringify(item),
     });
   },
-  getExamples() {
+  getBudget() {
     return $.ajax({
-      url: 'api/examples',
+      url: 'api/budget',
       type: 'GET',
     });
   },
   deleteExample(id) {
     return $.ajax({
-      url: `api/examples/${id}`,
+      url: `api/budget/${id}`,
       type: 'DELETE',
     });
   },
@@ -37,16 +37,16 @@ const API = {
 
 // refreshExamples gets new examples from the db and repopulates the list
 const refreshExamples = () => {
-  API.getExamples().then((data) => {
-    const $examples = data.map((example) => {
+  API.getBudget().then((data) => {
+    const $Budget = data.map((line) => {
       const $a = $('<a>')
-        .text(example.text)
-        .attr('href', `/example/${example.id}`);
+        .text(line.text)
+        .attr('href', `/example/${line.id}`);
 
       const $li = $('<li>')
         .attr({
           class: 'list-group-item',
-          'data-id': example.id,
+          'data-id': line.id,
         })
         .append($a);
 
@@ -60,7 +60,7 @@ const refreshExamples = () => {
     });
 
     $bills.empty();
-    $bills.append($examples);
+    $bills.append($Budget);
   });
 };
 
