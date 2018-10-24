@@ -1,8 +1,10 @@
 {
   "development": {
+    "username": "root",
+    "password": null,
     "host": "localhost",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "database": "budgetdb",
+    "dialect": "mysql"
   },
   "test": {
     "host": "localhost",

@@ -12,9 +12,9 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   sequelize = new Sequelize(
-    process.env.LOCAL_DB,
-    process.env.LOCAL_USER,
-    process.env.LOCAL_PWD,
+    config.database,
+    config.username,
+    config.password,
     config,
   );
 }
