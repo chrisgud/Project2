@@ -16,7 +16,7 @@
 
 body {
   text-align: center;
-  background-image: url("/img/soccer_field.webp");
+  /* background-image: url("/img/soccer_field.webp"); */
   opacity: 0.7;
 }
 
@@ -28,13 +28,13 @@ button {
   color: black !important;
 }
 
-.nav-wrapper {
+/* .nav-wrapper {
   background-color: black;
   height: 100px;
   font: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-}
+} */
 #pig {
 height: 20px;
 width: 20px;
