@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 let request;
 
-describe('GET /api/examples', () => {
+describe('GET /api/budget', () => {
   // Before each test begins, create a new request server for testing
   // & delete all examples from the db
   beforeEach(() => {
