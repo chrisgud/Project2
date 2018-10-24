@@ -1,4 +1,3 @@
-// Placeholder declare for .env Variables Later
 require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');

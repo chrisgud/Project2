@@ -1,10 +1,11 @@
-// Get references to page elements
 // Reference to create new bill with button
-const $newbill = $('#newbill');
+const $newBill = $('#newBill');
+const $newAmount = $('#newAmount');
 // Reference for the div containing the list of bills from the DB
 const $bills = $('#bills');
 // Reference for a delete bill option
-const $deletebill = $('#deletebill');
+const $deleteBill = $('#deletebill');
+const $enterBill = $('#enter-bill');
 
 // The API object contains methods for each kind of request we'll make
 const API = {
@@ -56,8 +57,8 @@ const refreshExamples = () => {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $bills.empty();
+    $bills.append($examples);
   });
 };
 
@@ -67,21 +68,18 @@ const handleFormSubmit = (event) => {
   event.preventDefault();
 
   const example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim(),
+    bill: $newBill.val().trim(),
+    amount: $newAmount.val().trim(),
   };
-  // Alerts are terrible but I'm lazy about changing this placeholder
-  if (!(example.text && example.description)) {
-    alert('You must enter an example text and description!'); //eslint-disable-line
+  if (!(example.bill && example.amount)) {
+    alert('You must enter a bill and an amount!'); //eslint-disable-line
     return;
   }
-
   API.saveExample(example).then(() => {
     refreshExamples();
   });
-
-  $exampleText.val('');
-  $exampleDescription.val('');
+  $newBill.val('');
+  $newAmount.val('');
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -97,5 +95,5 @@ const handleDeleteBtnClick = () => {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on('click', handleFormSubmit);
-$exampleList.on('click', '.delete', handleDeleteBtnClick);
+$enterBill.on('click', handleFormSubmit);
+$deleteBill.on('click', '.delete', handleDeleteBtnClick);
