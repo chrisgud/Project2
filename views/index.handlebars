@@ -27,15 +27,15 @@
           <h4>Expenses and Bills</h4>
         </header>
         <form>
-          <input id="newbill" type="text">
-          <label for="newbill">New Bill or Expense Item</label>
-          <input id="newmount" type="text">
-          <label for="newamount">Amount</label>
+          <input id="newBill" type="text">
+          <label for="newBill">New Bill or Expense Item</label>
+          <input id="newAmount" type="text">
+          <label for="newAmount">Amount</label>
         </form>
         <button class="btn waves-effect waves-light blue" id="enter-bill" type="submit" name="action">Enter a bill</button>
         <div class="bills">
           <ul>
-            {{#each ###}}
+            {{#each examples}}
             <div></div>
             {{/each}}
           </ul>

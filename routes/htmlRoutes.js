@@ -3,7 +3,7 @@ const db = require('../models');
 module.exports = (app) => {
   // Load index page
   app.get('/', (req, res) => {
-    db.Example.findAll({}).then((dbExamples) => {
+    db.Budget.findAll({}).then((dbExamples) => {
       res.render('index', {
         msg: 'App Name TBD!',
         examples: dbExamples,
@@ -13,7 +13,7 @@ module.exports = (app) => {
 
   // Load example page and pass in an example by id
   app.get('/example/:id', (req, res) => {
-    db.Example.findOne({ where: { id: req.params.id } }).then((dbExample) => {
+    db.Budget.findOne({ where: { id: req.params.id } }).then((dbExample) => {
       res.render('example', {
         example: dbExample,
       });
