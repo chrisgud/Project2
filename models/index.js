@@ -13,7 +13,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else if(process.env.NODE_ENV === 'test') {
   sequelize = new Sequelize(
-    process.env.LOCAL_TDB,
+    "testdb",
     "travis",
     null,
     config,
