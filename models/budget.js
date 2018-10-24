@@ -2,36 +2,36 @@ module.exports = (sequelize, DataTypes) => {
   const budget = sequelize.define('budget', {
     // total monthly income
     monthly_income: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       allowNull: false,
     },
     // i.e student loans
     loan: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     // housing cost
     rent: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     // electric, gas, water
     utilities: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     // gas, insurance, car note
     transportation: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     mobile: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
     // includes groceries
     food: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(13, 2),
       defaultValue: 0,
     },
   });
