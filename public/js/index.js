@@ -4,8 +4,10 @@ const $newAmount = $('#newAmount');
 // Reference for the div containing the list of bills from the DB
 const $bills = $('#bills');
 // Reference for a delete bill option
+
 const $deleteBill = $('#deletebill');
 const $enterBill = $('#enter-bill');
+
 
 // The API object contains methods for each kind of request we'll make
 const API = {
