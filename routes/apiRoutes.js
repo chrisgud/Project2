@@ -1,25 +1,24 @@
 const db = require('../models');
 
 module.exports = (app) => {
-  // Need to think about new functions
-  // Get all examples
+  // Get all bills
   app.get('/api/budget', (req, res) => {
-    db.Budget.findAll({}).then((dbExamples) => {
-      res.json(dbExamples);
+    db.Budget.findAll({}).then((dbBudget) => {
+      res.json(dbBudget);
     });
   });
 
-  // Create a new example
+  // Create a new bill
   app.post('/api/budget', (req, res) => {
-    db.Budget.create(req.body).then((dbExample) => {
-      res.json(dbExample);
+    db.Budget.create(req.body).then((dbBudget) => {
+      res.json(dbBudget);
     });
   });
 
-  // Delete an example by id
+  // Delete a bill by id
   app.delete('/api/budget/:id', (req, res) => {
-    db.Budget.destroy({ where: { id: req.params.id } }).then((dbExample) => {
-      res.json(dbExample);
+    db.Budget.destroy({ where: { id: req.params.id } }).then((dbBudget) => {
+      res.json(dbBudget);
     });
   });
 };
