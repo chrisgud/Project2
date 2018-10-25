@@ -30,38 +30,37 @@ const API = {
       type: 'DELETE',
     });
   },
+  updateBill(bill) {
+    return $.ajax({
+      method: 'PUT',
+      url: '/api/budget',
+      data: bill,
+    });
+  },
 };
 
 // refreshBillList gets the updated bill list from the db and repopulates the list
 const refreshBillList = () => {
   API.getBills().then((data) => {
     const $bills = data.map((bill) => {
-      const $a = $('<a>')
-        .text(bill.description)
-        .attr('href', `/budget/${bill.id}`);
-
-      const $b = $('<a>')
-        .text(bill.value)
-        .attr('href', `/budget/${bill.id}`);
-
-      const $li = $('<ol>')
-        .attr({
-          class: 'list-group-item',
-          'data-id': bill.id,
-        })
-        .append($a);
-      $li.append(':  ');
-      $li.append($b);
-
-      const $button = $('<button>')
-        .addClass('btn btn-danger float-right delete')
-        .text('ｘ');
-
-      $li.append($button);
-
-      return $li;
+      const $bill = $([
+        '<li class=\'list-group-item bill-item\' data-id=\'',
+        bill.id,
+        '\'>',
+        '<span class=\'spanDescription\'>',
+        bill.description,
+        '</span>: ',
+        '<input type =\'text\' class=\'editDescription\' style=\'display: none;\'>',
+        '$<span class=\'spanValue\'>',
+        bill.value,
+        '</span>',
+        '<input type =\'text\' class=\'editValue\' style=\'display: none;\'>',
+        '<button class=\'delete btn btn-danger float-right\'>ｘ</button>',
+        '</li>',
+      ].join(''));
+      $bill.data('bill', bill);
+      return $bill;
     });
-
     $billList.empty();
     $billList.append($bills);
   });
@@ -87,9 +86,9 @@ const handleFormSubmit = (event) => {
   $newAmount.val('');
 };
 
-// handleDeleteBtnClick is called when a bill's delete button is clicked
+// deleteButton is called when a bill's delete button is clicked
 // Remove the bill from the db and refresh the list
-const handleDeleteBtnClick = function deleteButton() {
+function deleteButton() {
   const idToDelete = $(this)
     .parent()
     .attr('data-id');
@@ -97,9 +96,55 @@ const handleDeleteBtnClick = function deleteButton() {
   API.deleteBill(idToDelete).then(() => {
     refreshBillList();
   });
-};
+}
 
-// Add event listeners to the submit and delete buttons
+function editBill() {
+  const currentBill = $(this).parent().data('bill');
+  $(this).hide();
+  if ($(this).hasClass('spanDescription')) {
+    $(this).parent().children('input.editDescription').val(currentBill.description);
+    $(this).parent().children('input.editDescription').show();
+    $(this).parent().children('input.editDescription').focus();
+  } else if ($(this).hasClass('spanValue')) {
+    $(this).parent().children('input.editValue').val(currentBill.value);
+    $(this).parent().children('input.editValue').show();
+    $(this).parent().children('input.editValue').focus();
+  }
+}
+
+function finishEdit(event) {
+  const updatedBill = $(this).parent().data('bill');
+  if (event.which === 13) {
+    if ($(this).hasClass('editDescription')) {
+      updatedBill.description = $(this).val().trim();
+    } else if ($(this).hasClass('editValue')) {
+      updatedBill.value = $(this).val().trim();
+    }
+    $(this).blur();
+    API.updateBill(updatedBill).then(() => {
+      refreshBillList();
+    });
+  }
+}
+
+function cancelEdit() {
+  const currentBill = $(this).parent().data('bill');
+  if (currentBill) {
+    $(this).parent().children().hide();
+    if ($(this).hasClass('editDescription')) {
+      $(this).val(currentBill.description);
+    } else if ($(this).hasClass('editValue')) {
+      $(this).val(currentBill.value);
+    }
+    $(this).parent().children('span').show();
+    $(this).parent().children('button').show();
+  }
+}
+
+// Add event listeners
+$(document).on('click', 'span', editBill);
+$(document).on('keyup', 'input', finishEdit);
+$(document).on('blur', 'input', cancelEdit);
 $billInput.on('click', handleFormSubmit);
-$billList.on('click', '.delete', handleDeleteBtnClick);
+$billList.on('click', '.delete', deleteButton);
 refreshBillList();

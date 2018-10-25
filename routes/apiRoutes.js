@@ -21,4 +21,14 @@ module.exports = (app) => {
       res.json(dbBudget);
     });
   });
+
+  // Update a bill by id
+  app.put('/api/budget/', (req, res) => {
+    const { id, description, value } = req.body;
+    db.Budget.findById(id)
+      .then(bill => bill.update({ description, value }))
+      .then((updatedBill) => {
+        res.json(updatedBill);
+      });
+  });
 };
