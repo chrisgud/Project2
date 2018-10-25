@@ -1,13 +1,13 @@
-/* eslint-env node, jquery, browser */
-// Get references to page elements
 // Reference to create new bill with button
-const $newbill = $('#newbill');
+const $newBill = $('#newBill');
+const $newAmount = $('#newAmount');
 // Reference for the div containing the list of bills from the DB
-const $bills = $('#bills');
+const $bills = $('.bills');
 // Reference for a delete bill option
-const $deletebill = $('#deletebill');
-// reference for an update bill amount option
-const $updatebill = $('#updatebill');
+
+const $deleteBill = $('#deletebill');
+const $enterBill = $('#enter-bill');
+
 
 // The API object contains methods for each kind of request we'll make
 const API = {
@@ -17,21 +17,21 @@ const API = {
         'Content-Type': 'application/json',
       },
       type: 'POST',
-      url: 'api/examples',
+      url: 'api/budget',
       data: JSON.stringify(example),
     });
   },
   getExamples() {
     return $.ajax({
-      url: 'api/examples',
+      url: 'api/budget',
       type: 'GET',
     });
   },
   deleteExample(id) {
-    return $.ajax({
-      url: `api/examples/${id}`,
+    $('#deleteBtn').on('click', () => $.ajax({
+      url: `api/budget/${id}`,
       type: 'DELETE',
-    });
+    }));
   },
 };
 
@@ -40,27 +40,37 @@ const refreshExamples = () => {
   API.getExamples().then((data) => {
     const $examples = data.map((example) => {
       const $a = $('<a>')
-        .text(example.text)
-        .attr('href', `/example/${example.id}`);
+        .text(example.description)
+        .attr('href', `/budget/${example.id}`);
 
-      const $li = $('<li>')
+      const $b = $('<a>')
+        .text(example.value)
+        .attr('href', `/budget/${example.id}`);
+
+
+      const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
           'data-id': example.id,
-        })
-        .append($a);
-
+        });
       const $button = $('<button>')
-        .addClass('btn btn-danger float-right delete')
-        .text('ｘ');
-
+        .addclass('waves-effect waves-light btn')
+        .append($a);
+      $li.append(':  ');
+      $li.append($b);
       $li.append($button);
+
+      // const $button = $('<button>')
+      //   .addClass('btn btn-danger float-right delete')
+      //   .text('ｘ');
+
+      // $li.append($button);
 
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $bills.empty();
+    $bills.append($examples);
   });
 };
 
@@ -70,21 +80,18 @@ const handleFormSubmit = (event) => {
   event.preventDefault();
 
   const example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim(),
+    description: $newBill.val().trim(),
+    value: $newAmount.val().trim(),
   };
-  // Alerts are terrible but I'm lazy about changing this placeholder
-  if (!(example.text && example.description)) {
-    alert('You must enter an example text and description!'); //eslint-disable-line
+  if (!(example.description && example.value)) {
+    alert('You must enter a bill and an amount!'); //eslint-disable-line
     return;
   }
-
   API.saveExample(example).then(() => {
     refreshExamples();
   });
-
-  $exampleText.val('');
-  $exampleDescription.val('');
+  $newBill.val('');
+  $newAmount.val('');
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -100,5 +107,6 @@ const handleDeleteBtnClick = () => {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on('click', handleFormSubmit);
-$exampleList.on('click', '.delete', handleDeleteBtnClick);
+$enterBill.on('click', handleFormSubmit);
+$deleteBill.on('click', '.delete', handleDeleteBtnClick);
+refreshExamples();

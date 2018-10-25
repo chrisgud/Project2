@@ -1,7 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  const budget = sequelize.define('budget', {
-    text: DataTypes.STRING,
-    amount: DataTypes.DECIMAL(13, 2),
+  const Budget = sequelize.define('Budget', {
+    userId: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    value: DataTypes.DECIMAL(13, 2),
+    occurance: DataTypes.DATE,
+    recurrance: DataTypes.DATE,
+    deleted: DataTypes.BOOLEAN,
   });
-  return budget;
+  return Budget;
 };

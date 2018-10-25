@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -18,8 +19,14 @@ else if (env === "test") {
     process.env.LOCAL_PWD,
     config,
   );
-}
-else {
+} else if(process.env.NODE_ENV === 'test') {
+  sequelize = new Sequelize(
+    "testdb",
+    "travis",
+    null,
+    config,
+  );
+} else {
   sequelize = new Sequelize(
     process.env.LOCAL_DB,
     process.env.LOCAL_USER,

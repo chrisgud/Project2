@@ -16,8 +16,8 @@
 
 body {
   text-align: center;
-  background-image: url("/img/soccer_field.webp");
-  opacity: 0.7;
+  /* background-image: url("/img/soccer_field.webp"); */
+  opacity: 0.6;
 }
 
 button {
@@ -28,14 +28,22 @@ button {
   color: black !important;
 }
 
-.nav-wrapper {
+/* .nav-wrapper {
   background-color: black;
   height: 100px;
   font: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-}
+} */
 #pig {
-height: 20px;
-width: 20px;
+  margin: 0 0 0 -2000px;
+  height: 50px;
+  width: 50px;
+}
+
+.waves-effect waves-light btn {
+  background-image: url("../public/img/button-delete-icon-4489.png");
+  width: 60px;
+  height: 20px;
+  float: right;
 }
