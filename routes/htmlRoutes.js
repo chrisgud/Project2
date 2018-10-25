@@ -12,7 +12,7 @@ module.exports = (app) => {
   });
 
   // Load example page and pass in an example by id
-  app.get('/example/:id', (req, res) => {
+  app.get('/budget/:id', (req, res) => {
     db.Budget.findOne({ where: { id: req.params.id } }).then((dbExample) => {
       res.render('example', {
         example: dbExample,

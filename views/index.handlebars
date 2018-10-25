@@ -16,7 +16,7 @@
             <label for="monthly_income">Monthly Income</label>
           </div>
         </div>
-        <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button>
+        {{!-- <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button> --}}
       </div>
       <!-- --------- Empty Div for spacing-->
       <div class="col s2"></div>
@@ -35,8 +35,7 @@
         <button class="btn waves-effect waves-light blue" id="enter-bill" type="submit" name="action">Enter a bill</button>
         <div class="bills">
           <ul>
-            {{#each examples}}
-            <div></div>
+            {{#each example}}
             {{/each}}
           </ul>
         </div>

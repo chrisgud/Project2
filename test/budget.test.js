@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 let request;
 
-describe('GET /api/examples', () => {
+describe('GET /api/budget', () => {
   // Before each test begins, create a new request server for testing
   // & delete all examples from the db
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe('GET /api/examples', () => {
       { value: 1.02, description: 'Second Description' },
     ]).then(() => {
       // Request the route that returns all examples
-      request.get('/api/examples').end((err, res) => {
+      request.get('/api/budget').end((err, res) => {
         const responseStatus = res.status;
         const responseBody = res.body;
 
