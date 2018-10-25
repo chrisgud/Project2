@@ -1,33 +1,39 @@
-// Reference to create new bill with button
+// References to create new bill with button
 const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
+<<<<<<< HEAD
 // Reference for the div containing the list of bills from the DB
 const $bills = $('.bills');
 // Reference for a delete bill option
 const $deleteBill = $('.deleteBill');
 const $enterBill = $('#enter-bill');
 let totalSum;
+=======
+const $billInput = $('#billInput');
+>>>>>>> master
 
+// Reference for the div containing the list of bills from the DB
+const $billList = $('#billList');
 
-// The API object contains methods for each kind of request we'll make
+// The API object contains methods for each kind of request
 const API = {
-  saveExample(example) {
+  saveBill(bill) {
     return $.ajax({
       headers: {
         'Content-Type': 'application/json',
       },
       type: 'POST',
       url: 'api/budget',
-      data: JSON.stringify(example),
+      data: JSON.stringify(bill),
     });
   },
-  getExamples() {
+  getBills() {
     return $.ajax({
       url: 'api/budget',
       type: 'GET',
     });
   },
-  deleteExample(id) {
+  deleteBill(id) {
     return $.ajax({
       url: `api/budget/${id}`,
       type: 'DELETE',
@@ -35,22 +41,22 @@ const API = {
   },
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-const refreshExamples = () => {
-  API.getExamples().then((data) => {
-    const $examples = data.map((example) => {
+// refreshBillList gets the updated bill list from the db and repopulates the list
+const refreshBillList = () => {
+  API.getBills().then((data) => {
+    const $bills = data.map((bill) => {
       const $a = $('<a>')
-        .text(example.description)
-        .attr('href', `/budget/${example.id}`);
+        .text(bill.description)
+        .attr('href', `/budget/${bill.id}`);
 
       const $b = $('<a>')
-        .text(example.value)
-        .attr('href', `/budget/${example.id}`);
+        .text(bill.value)
+        .attr('href', `/budget/${bill.id}`);
 
       const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
-          'data-id': example.id,
+          'data-id': bill.id,
         })
         .append($a);
       $li.append(':  ');
@@ -58,6 +64,7 @@ const refreshExamples = () => {
 
       const $button = $('<button>')
         .addClass('btn btn-danger float-right deleteBill')
+        .addClass('btn btn-danger float-right delete')
         .text('ｘ');
 
       $li.append($button);
@@ -65,41 +72,41 @@ const refreshExamples = () => {
       return $li;
     });
 
-    $bills.empty();
-    $bills.append($examples);
+    $billList.empty();
+    $billList.append($bills);
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new bill
+// Save the new bill to the db and refresh the list
 const handleFormSubmit = (event) => {
   event.preventDefault();
 
-  const example = {
+  const bill = {
     description: $newBill.val().trim(),
     value: $newAmount.val().trim(),
   };
-  if (!(example.description && example.value)) {
+  if (!(bill.description && bill.value)) {
     alert('You must enter a bill and an amount!'); //eslint-disable-line
     return;
   }
-  API.saveExample(example).then(() => {
-    refreshExamples();
+  API.saveBill(bill).then(() => {
+    refreshBillList();
   });
   $newBill.val('');
   $newAmount.val('');
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-const handleDeleteBtnClick = () => {
+// handleDeleteBtnClick is called when a bill's delete button is clicked
+// Remove the bill from the db and refresh the list
+const handleDeleteBtnClick = function deleteButton() {
   const idToDelete = $(this)
     .parent()
     .attr('data-id');
   console.log(idToDelete);
 
-  API.deleteExample(idToDelete).then(() => {
-    refreshExamples();
+  API.deleteBill(idToDelete).then(() => {
+    refreshBillList();
   });
 };
 
@@ -137,3 +144,6 @@ const updateTotalMonthlyIncome = () => {
 // Display the difference in total and bills
 
 $monthlyIncome.on('click', (updateTotalMonthlyIncome));
+$billInput.on('click', handleFormSubmit);
+$billList.on('click', '.delete', handleDeleteBtnClick);
+refreshBillList();

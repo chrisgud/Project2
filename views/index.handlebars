@@ -3,7 +3,7 @@
     <div class="row">
       <div class="nav-wrapper">
         <img id="pig" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC44KA0ytm_CRwz1Te_iJKaWk9juM9dvnzJMvmpd5TYGP88Yrq">
-        <h1 id="red">App Name TBD</h1>
+        <h1 id="red">Bill Buddy</h1>
       </div>
     </div>
     <div class="row">
@@ -44,10 +44,10 @@
           <input id="newAmount" type="text">
           <label for="newAmount">Amount</label>
         </form>
-        <button class="btn waves-effect waves-light blue" id="enter-bill" type="submit" name="action">Enter a bill</button>
+        <button class="btn waves-effect waves-light blue" id="billInput" type="submit" name="action">Enter a bill</button>
         <div class="bills">
-          <ul>
-            {{#each example}}
+          <ul id='billList' class='list-group'>
+            {{#each bill}}
             {{/each}}
           </ul>
         </div>
