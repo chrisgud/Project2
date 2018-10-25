@@ -1,16 +1,7 @@
 // References to create new bill with button
 const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
-<<<<<<< HEAD
-// Reference for the div containing the list of bills from the DB
-const $bills = $('.bills');
-// Reference for a delete bill option
-const $deleteBill = $('.deleteBill');
-const $enterBill = $('#enter-bill');
-let totalSum;
-=======
 const $billInput = $('#billInput');
->>>>>>> master
 
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
@@ -110,10 +101,10 @@ const handleDeleteBtnClick = function deleteButton() {
   });
 };
 
-// Add event listeners to the submit and delete buttons
-$enterBill.on('click', handleFormSubmit);
-$deleteBill.on('click', '.deleteBill', handleDeleteBtnClick);
-refreshExamples();
+// // Add event listeners to the submit and delete buttons
+// $enterBill.on('click', handleFormSubmit);
+// $deleteBill.on('click', '.deleteBill', handleDeleteBtnClick);
+// refreshExamples();
 
 // Display the monthly income in a div
 const $monthlyIncome = $('#monthlyIncome');
