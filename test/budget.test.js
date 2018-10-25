@@ -24,7 +24,7 @@ describe('GET /api/budget', () => {
       { value: 1.02, description: 'Second Description' },
     ]).then(() => {
       // Request the route that returns all examples
-      request.get('/api/examples').end((err, res) => {
+      request.get('/api/budget').end((err, res) => {
         const responseStatus = res.status;
         const responseBody = res.body;
 
