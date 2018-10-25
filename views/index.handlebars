@@ -7,7 +7,20 @@
       </div>
     </div>
     <div class="row">
-
+      <div class="col s4">
+        <h3>Total Monthly Income</h3>
+        <div id="totalMonthlyIncomeDisplay"></div>
+      </div>
+      <div class="col s4">
+        <h3>Total Expenses/Bills</h3>
+        <div id="sumOfBills"></div>
+      </div>
+      <div class="col s4">
+        <h3>Difference</h3>
+        <div id="difference" class="diff"></div>
+      </div>
+    </div>
+    <div class="row">
       <!-- ------------- Div for image and total-->
       <div class="col s5">
         <div class="total">
@@ -16,13 +29,12 @@
             <label for="monthly_income">Monthly Income</label>
           </div>
         </div>
-        {{!-- <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit</button> --}}
+        <button class="btn waves-effect waves-light blue" id="monthlyIncome" type="submit" name="action">Submit</button>
       </div>
       <!-- --------- Empty Div for spacing-->
       <div class="col s2"></div>
       <!-- -------------- Div for the expenses and bills-->
       <div class="col s5">
-
         <header>
           <h4>Expenses and Bills</h4>
         </header>

@@ -4,9 +4,9 @@ const $newAmount = $('#newAmount');
 // Reference for the div containing the list of bills from the DB
 const $bills = $('.bills');
 // Reference for a delete bill option
-
-const $deleteBill = $('#deletebill');
+const $deleteBill = $('.deleteBill');
 const $enterBill = $('#enter-bill');
+let totalSum;
 
 
 // The API object contains methods for each kind of request we'll make
@@ -47,7 +47,6 @@ const refreshExamples = () => {
         .text(example.value)
         .attr('href', `/budget/${example.id}`);
 
-
       const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
@@ -57,11 +56,11 @@ const refreshExamples = () => {
       $li.append(':  ');
       $li.append($b);
 
-      // const $button = $('<button>')
-      //   .addClass('btn btn-danger float-right delete')
-      //   .text('ｘ');
+      const $button = $('<button>')
+        .addClass('btn btn-danger float-right deleteBill')
+        .text('ｘ');
 
-      // $li.append($button);
+      $li.append($button);
 
       return $li;
     });
@@ -97,6 +96,7 @@ const handleDeleteBtnClick = () => {
   const idToDelete = $(this)
     .parent()
     .attr('data-id');
+  console.log(idToDelete);
 
   API.deleteExample(idToDelete).then(() => {
     refreshExamples();
@@ -105,5 +105,35 @@ const handleDeleteBtnClick = () => {
 
 // Add event listeners to the submit and delete buttons
 $enterBill.on('click', handleFormSubmit);
-$deleteBill.on('click', '.delete', handleDeleteBtnClick);
+$deleteBill.on('click', '.deleteBill', handleDeleteBtnClick);
 refreshExamples();
+
+// Display the monthly income in a div
+const $monthlyIncome = $('#monthlyIncome');
+const $difference = $('#difference');
+// const $diff = $('.diff');
+
+const updateTotalMonthlyIncome = () => {
+  // $('.diff').css;
+  const income = parseFloat($('#monthly_income').val().trim());
+  // Add for if not a number
+  const div = $('#totalMonthlyIncomeDisplay');
+  div.html(income);
+  $('#monthly_income').val('');
+
+  if (income > 0) {
+    $difference.html(income - 100);
+    // $('.diff').css('color', 'green');
+  } else if (income < 0) {
+    $difference.html(`-(${income}) - 100`);
+    // $('.diff').css('color', 'red');
+  } else {
+    $difference.html(income - 100);
+  }
+};
+
+// Display the sum of the expenses in the database
+
+// Display the difference in total and bills
+
+$monthlyIncome.on('click', (updateTotalMonthlyIncome));
