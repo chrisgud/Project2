@@ -6,6 +6,7 @@ const $continue = $('#continue');
 const $message = $('#modal1');
 const $comment = $('#comment');
 const $dollar = $('#dollar');
+const $sumBills = $('#sumOfBills');
 
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
@@ -28,8 +29,17 @@ const API = {
       type: 'GET',
     });
   },
+  
   deleteExample(id) {
     $('#deleteBtn').on('click', () => $.ajax({
+  getTotalExpenses() {
+    return $.ajax({
+      url: 'api/total',
+      type: 'GET',
+    });
+  },
+  deleteBill(id) {
+    return $.ajax({
       url: `api/budget/${id}`,
       type: 'DELETE',
     }));
@@ -43,30 +53,36 @@ const API = {
   },
 };
 
+const getTotalBills = () => {
+  API.getTotalExpenses().then((data) => {
+    const totalExpenses = data[0].total;
+    $sumBills.html(totalExpenses);
+  });
+};
+
 // refreshBillList gets the updated bill list from the db and repopulates the list
 const refreshBillList = () => {
   API.getBills().then((data) => {
     const $bills = data.map((bill) => {
-      const $a = $('<a>')
-        .text(bill.description)
-        .attr('href', `/budget/${bill.id}`);
+      const $p = $('<p>')
+        .text(`${bill.description}  `.toUpperCase());
 
       const $b = $('<a>')
-        .text(bill.value)
-        .attr('href', `/budget/${bill.id}`);
+        .text(`$${bill.value}    `)
+        .attr('href', `/budget/${bill.id}`)
+        .attr('target', '_blank');
 
       const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
           'data-id': bill.id,
         })
-        .append($a);
-      $li.append(':  ');
-      $li.append($b);
+        .append($p);
+      $p.append(':  ');
+      $p.append($b);
 
       const $button = $('<button>')
-        .addClass('btn btn-danger float-right deleteBill')
-        .addClass('btn btn-danger float-right delete')
+        .addClass('btn waves-effect waves-light blue delete')
         .text('ｘ');
 
       $li.append($button);
@@ -75,6 +91,7 @@ const refreshBillList = () => {
     });
     $billList.empty();
     $billList.append($bills);
+    getTotalBills();
   });
 };
 
@@ -95,6 +112,7 @@ const handleFormSubmit = (event) => {
   }
   API.saveBill(bill).then(() => {
     refreshBillList();
+    getTotalBills();
   });
   $newBill.val('');
   $newAmount.val('');
@@ -165,15 +183,14 @@ function cancelEdit() {
 // Display the monthly income in a div
 const $monthlyIncome = $('#monthlyIncome');
 const $difference = $('#difference');
-// const $diff = $('.diff');
-
+const tot = $sumBills.innerText;
 const updateTotalMonthlyIncome = () => {
-  // $('.diff').css;
   const income = parseFloat($('#monthly_income').val().trim());
   // Add for if not a number
   const div = $('#totalMonthlyIncomeDisplay');
-  div.html(income);
+  div.html(`$${income.toFixed(2)}`);
   $('#monthly_income').val('');
+
 
   if (income > 0) {
     $difference.html(income - 100);
@@ -191,10 +208,18 @@ const updateTotalMonthlyIncome = () => {
     $message.show();
     $comment.text('No blank or negative paychecks!');
     $dollar.hide();
+  if (income - 1 >= 0) {
+    $difference.css('color', 'green');
+    $difference.html(`$${income.toFixed(2) - tot}`);
+  } else {
+    $difference.css('color', 'red');
+    $difference.html(`$(${income.toFixed(2) - tot})`);
   }
 };
 
 // Display the sum of the expenses in the database
+// need to iterate through all of the values in the db
+// then set the sum to a var - attach this to the html #sumOfBills
 
 // Display the difference in total and bills
 
@@ -202,10 +227,12 @@ $monthlyIncome.on('click', (updateTotalMonthlyIncome));
 $billInput.on('click', handleFormSubmit);
 $billList.on('click', '.delete', deleteButton);
 refreshBillList();
-
+  
 $('#monthlyIncome').submit();
 
 // button function for 'continue' button
 $continue.on('click', () => {
   $message.hide();
 });
+
+console.log(tot);

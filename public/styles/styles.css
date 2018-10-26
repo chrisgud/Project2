@@ -7,7 +7,7 @@ body {
 }
 
 .bills {
-  border: 2px groove red;
+  border: 2px groove orange;
   border-radius: 10px;
   box-shadow: 10px 10px grey;
   margin-top: 50px;
@@ -20,6 +20,13 @@ body {
 
 .total {
   margin-top: 100px;
+}
+
+body {
+  text-align: center;
+  background: #D3CCE3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
 }
 
 button {
@@ -59,4 +66,20 @@ button {
 #dollar {
   height: 10px;
   width: 20px;
+
+.delete {
+  width: 10%;
+  padding-left: 8px;
+  display: block;
+}
+
+p {
+  text-align: left;
+}
+
+.displayValues {
+  border: solid orange 2px;
+  font-size: 50px;
+  border-radius: 10px;
+  background-color: white;
 }

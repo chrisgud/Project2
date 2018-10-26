@@ -16,17 +16,30 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="continue">Continue</a>
     </div>
     </div>
+        <h1 id="red">Bill Buddy</h1>
+      </div>
+    </div>
+    {{!-- Display row for titles of values --}}
     <div class="row">
       <div class="col s4">
-        <h3>Total Monthly Income</h3>
+        <h5>Total Monthly Income</h5>
+      </div>
+      <div class="col s4">
+        <h5>Total Expenses/Bills</h5>
+      </div>
+      <div class="col s4">
+        <h5>Difference</h5>
+      </div>
+    </div>
+    {{!-- Display row for Values --}}
+    <div class="row displayValues">
+      <div class="col s4">
         <div id="totalMonthlyIncomeDisplay"></div>
       </div>
       <div class="col s4">
-        <h3>Total Expenses/Bills</h3>
         <div id="sumOfBills"></div>
       </div>
       <div class="col s4">
-        <h3>Difference</h3>
         <div id="difference" class="diff"></div>
       </div>
     </div>
@@ -44,10 +57,6 @@
       <!-- --------- Empty Div for spacing-->
       <div class="col s2"></div>
       <!-- -------------- Div for the expenses and bills-->
-       {{!-- modal trigger --}}
-      {{!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> --}}
-      
-     
       <div class="col s5">
         <header>
           <h4>Expenses and Bills</h4>
