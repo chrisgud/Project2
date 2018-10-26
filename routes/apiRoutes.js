@@ -1,3 +1,4 @@
+const sequelize = require('sequelize');
 const db = require('../models');
 
 module.exports = (app) => {
@@ -30,5 +31,16 @@ module.exports = (app) => {
       .then((updatedBill) => {
         res.json(updatedBill);
       });
+  });
+
+
+  // Sum of all expenses
+  app.get('/api/total', (req, res) => {
+    db.Budget.findAll({
+      attributes: [[sequelize.fn('SUM', sequelize.col('value')), 'total']],
+    }).then((dbBudget) => {
+      console.log(dbBudget);
+      res.json(dbBudget);
+    });
   });
 };
