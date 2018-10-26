@@ -33,7 +33,6 @@ module.exports = (app) => {
       });
   });
 
-
   // Sum of all expenses
   app.get('/api/total', (req, res) => {
     db.Budget.findAll({

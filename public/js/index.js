@@ -2,7 +2,7 @@
 const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
 const $billInput = $('#billInput');
-
+const $sumBills = $('#sumOfBills');
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
 
@@ -24,6 +24,12 @@ const API = {
       type: 'GET',
     });
   },
+  getTotalExpenses() {
+    return $.ajax({
+      url: 'api/total',
+      type: 'GET',
+    });
+  },
   deleteBill(id) {
     return $.ajax({
       url: `api/budget/${id}`,
@@ -37,6 +43,13 @@ const API = {
       data: bill,
     });
   },
+};
+
+const getTotalBills = () => {
+  API.getTotalExpenses().then((data) => {
+    const totalExpenses = data[0].total;
+    $sumBills.html(totalExpenses);
+  });
 };
 
 // refreshBillList gets the updated bill list from the db and repopulates the list
@@ -70,6 +83,7 @@ const refreshBillList = () => {
     });
     $billList.empty();
     $billList.append($bills);
+    getTotalBills();
   });
 };
 
@@ -88,6 +102,7 @@ const handleFormSubmit = (event) => {
   }
   API.saveBill(bill).then(() => {
     refreshBillList();
+    getTotalBills();
   });
   $newBill.val('');
   $newAmount.val('');
@@ -158,7 +173,7 @@ function cancelEdit() {
 // Display the monthly income in a div
 const $monthlyIncome = $('#monthlyIncome');
 const $difference = $('#difference');
-
+const tot = $sumBills.innerText;
 const updateTotalMonthlyIncome = () => {
   const income = parseFloat($('#monthly_income').val().trim());
   // Add for if not a number
@@ -168,10 +183,10 @@ const updateTotalMonthlyIncome = () => {
 
   if (income - 1 >= 0) {
     $difference.css('color', 'green');
-    $difference.html(`$${income.toFixed(2) - 1}`);
+    $difference.html(`$${income.toFixed(2) - tot}`);
   } else {
     $difference.css('color', 'red');
-    $difference.html(`$(${income.toFixed(2) - 1})`);
+    $difference.html(`$(${income.toFixed(2) - tot})`);
   }
 };
 
@@ -185,3 +200,4 @@ $monthlyIncome.on('click', (updateTotalMonthlyIncome));
 $billInput.on('click', handleFormSubmit);
 $billList.on('click', '.delete', deleteButton);
 refreshBillList();
+console.log(tot);
