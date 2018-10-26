@@ -43,21 +43,22 @@ const API = {
 const refreshBillList = () => {
   API.getBills().then((data) => {
     const $bills = data.map((bill) => {
-      const $a = $('<p>')
+      const $p = $('<p>')
         .text(`${bill.description}  `.toUpperCase());
 
       const $b = $('<a>')
         .text(`$${bill.value}    `)
-        .attr('href', `/budget/${bill.id}`);
+        .attr('href', `/budget/${bill.id}`)
+        .attr('target', '_blank');
 
       const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
           'data-id': bill.id,
         })
-        .append($a);
-      $a.append(':  ');
-      $a.append($b);
+        .append($p);
+      $p.append(':  ');
+      $p.append($b);
 
       const $button = $('<button>')
         .addClass('btn waves-effect waves-light blue delete')
