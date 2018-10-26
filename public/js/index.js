@@ -43,12 +43,11 @@ const API = {
 const refreshBillList = () => {
   API.getBills().then((data) => {
     const $bills = data.map((bill) => {
-      const $a = $('<a>')
-        .text(bill.description)
-        .attr('href', `/budget/${bill.id}`);
+      const $a = $('<p>')
+        .text(`${bill.description}  `.toUpperCase());
 
       const $b = $('<a>')
-        .text(bill.value)
+        .text(`$${bill.value}    `)
         .attr('href', `/budget/${bill.id}`);
 
       const $li = $('<ol>')
@@ -57,12 +56,11 @@ const refreshBillList = () => {
           'data-id': bill.id,
         })
         .append($a);
-      $li.append(':  ');
-      $li.append($b);
+      $a.append(':  ');
+      $a.append($b);
 
       const $button = $('<button>')
-        .addClass('btn btn-danger float-right deleteBill')
-        .addClass('btn btn-danger float-right delete')
+        .addClass('btn waves-effect waves-light blue delete')
         .text('ｘ');
 
       $li.append($button);
@@ -177,6 +175,8 @@ const updateTotalMonthlyIncome = () => {
 };
 
 // Display the sum of the expenses in the database
+// need to iterate through all of the values in the db
+// then set the sum to a var - attach this to the html #sumOfBills
 
 // Display the difference in total and bills
 
