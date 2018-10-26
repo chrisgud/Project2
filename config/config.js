@@ -2,17 +2,13 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    username: process.env.LOCAL_USER,
-    password: process.env.LOCAL_PWD,
-    database: process.env.LOCAL_DB,
     host: 'localhost',
+    user: 'root',
+    password: null,
     dialect: 'mysql',
     operatorsAliases: false,
   },
   test: {
-    username: process.env.LOCAL_USER,
-    password: process.env.LOCAL_PWD,
-    database: process.env.LOCAL_TDB,
     host: 'localhost',
     dialect: 'mysql',
     logging: false,

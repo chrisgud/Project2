@@ -3,8 +3,18 @@
     <div class="row">
       <div class="nav-wrapper">
         <img id="pig" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC44KA0ytm_CRwz1Te_iJKaWk9juM9dvnzJMvmpd5TYGP88Yrq">
-        <h1 id="red">Bill Buddy</h1>
+        <h1 id="red" style="font:white">Bill Buddy</h1>
       </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4 id="comment"></h4>
+          <i class="fas fa-money-bill-wave" id="dollar"></i>
+        </div>
+        <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="continue">Continue</a>
+    </div>
     </div>
     <div class="row">
       <div class="col s4">
@@ -34,6 +44,10 @@
       <!-- --------- Empty Div for spacing-->
       <div class="col s2"></div>
       <!-- -------------- Div for the expenses and bills-->
+       {{!-- modal trigger --}}
+      {{!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> --}}
+      
+     
       <div class="col s5">
         <header>
           <h4>Expenses and Bills</h4>

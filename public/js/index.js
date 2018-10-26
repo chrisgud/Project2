@@ -2,6 +2,10 @@
 const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
 const $billInput = $('#billInput');
+const $continue = $('#continue');
+const $message = $('#modal1');
+const $comment = $('#comment');
+const $dollar = $('#dollar');
 
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
@@ -84,7 +88,9 @@ const handleFormSubmit = (event) => {
     value: $newAmount.val().trim(),
   };
   if (!(bill.description && bill.value)) {
-    alert('You must enter a bill and an amount!'); //eslint-disable-line
+    $message.show();
+    $comment.text('You must enter a bill and an amount!');
+    $dollar.hide();
     return;
   }
   API.saveBill(bill).then(() => {
@@ -172,11 +178,19 @@ const updateTotalMonthlyIncome = () => {
   if (income > 0) {
     $difference.html(income - 100);
     // $('.diff').css('color', 'green');
+    $message.show();
+    $comment.text('I see you, money maker!');
   } else if (income < 0) {
     $difference.html(`-(${income}) - 100`);
     // $('.diff').css('color', 'red');
+    $message.show();
+    $comment.text('No blank or negative paychecks!');
+    $dollar.hide();
   } else {
     $difference.html(income - 100);
+    $message.show();
+    $comment.text('No blank or negative paychecks!');
+    $dollar.hide();
   }
 };
 
@@ -188,3 +202,10 @@ $monthlyIncome.on('click', (updateTotalMonthlyIncome));
 $billInput.on('click', handleFormSubmit);
 $billList.on('click', '.delete', deleteButton);
 refreshBillList();
+
+$('#monthlyIncome').submit();
+
+// button function for 'continue' button
+$continue.on('click', () => {
+  $message.hide();
+});
