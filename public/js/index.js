@@ -43,32 +43,30 @@ const API = {
 const refreshBillList = () => {
   API.getBills().then((data) => {
     const $bills = data.map((bill) => {
-      const $a = $('<a>')
-        .text(bill.description)
-        .attr('href', `/budget/${bill.id}`);
+      const $p = $('<p>')
+        .text(`${bill.description}  `.toUpperCase());
 
       const $b = $('<a>')
-        .text(bill.value)
-        .attr('href', `/budget/${bill.id}`);
+        .text(`$${bill.value}    `)
+        .attr('href', `/budget/${bill.id}`)
+        .attr('target', '_blank');
 
       const $li = $('<ol>')
         .attr({
           class: 'list-group-item',
           'data-id': bill.id,
         })
-        .append($a);
-      $li.append(':  ');
-      $li.append($b);
+        .append($p);
+      $p.append(':  ');
+      $p.append($b);
 
       const $button = $('<button>')
-        .addClass('btn btn-danger float-right deleteBill')
-        .addClass('btn btn-danger float-right delete')
+        .addClass('btn waves-effect waves-light blue delete')
         .text('ｘ');
 
       $li.append($button);
 
       return $li;
-
     });
     $billList.empty();
     $billList.append($bills);
@@ -160,28 +158,26 @@ function cancelEdit() {
 // Display the monthly income in a div
 const $monthlyIncome = $('#monthlyIncome');
 const $difference = $('#difference');
-// const $diff = $('.diff');
 
 const updateTotalMonthlyIncome = () => {
-  // $('.diff').css;
   const income = parseFloat($('#monthly_income').val().trim());
   // Add for if not a number
   const div = $('#totalMonthlyIncomeDisplay');
-  div.html(income);
+  div.html(`$${income.toFixed(2)}`);
   $('#monthly_income').val('');
 
-  if (income > 0) {
-    $difference.html(income - 100);
-    // $('.diff').css('color', 'green');
-  } else if (income < 0) {
-    $difference.html(`-(${income}) - 100`);
-    // $('.diff').css('color', 'red');
+  if (income - 1 >= 0) {
+    $difference.css('color', 'green');
+    $difference.html(`$${income.toFixed(2) - 1}`);
   } else {
-    $difference.html(income - 100);
+    $difference.css('color', 'red');
+    $difference.html(`$(${income.toFixed(2) - 1})`);
   }
 };
 
 // Display the sum of the expenses in the database
+// need to iterate through all of the values in the db
+// then set the sum to a var - attach this to the html #sumOfBills
 
 // Display the difference in total and bills
 
