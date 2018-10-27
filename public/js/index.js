@@ -7,7 +7,11 @@ const $sumBills = $('#sumOfBills');
 
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
-
+// references to the modal
+const $continue = $('#continue');
+const $message = $('#modal1');
+const $comment = $('#comment');
+const $dollar = $('#dollar');
 // The API object contains methods for each kind of request
 const API = {
   saveBill(bill) {
@@ -99,7 +103,9 @@ const handleFormSubmit = (event) => {
     value: $newAmount.val().trim(),
   };
   if (!(bill.description && bill.value)) {
-    alert('You must enter a bill and an amount!'); //eslint-disable-line
+    $message.show();
+    $comment.text('You must enter a bill and an amount!');
+    $dollar.hide();
     return;
   }
   API.saveBill(bill).then(() => {
@@ -187,12 +193,18 @@ const updateTotalMonthlyIncome = () => {
   $('#monthly_income').val('');
 
   if (income - 1 >= 0) {
+    $message.show();
+    $comment.text('I see you, money maker!');
+    $dollar.show();
     $difference.css('color', 'green');
     $difference.html(`$${income.toFixed(2) - tot}`);
     console.log(income);
   } else {
+    $message.show();
+    $comment.text('No blank or negative paychecks!');
+    $dollar.hide();
     $difference.css('color', 'red');
-    $difference.html(`$(${income.toFixed(2) - tot})`);
+    // $difference.html(`$(${income.toFixed(2) - tot})`);
   }
 };
 
@@ -206,3 +218,9 @@ $monthlyIncome.on('click', (updateTotalMonthlyIncome));
 $billInput.on('click', handleFormSubmit);
 $billList.on('click', '.delete', deleteButton);
 refreshBillList();
+console.log(tot);
+
+// button function for 'continue' button
+$continue.on('click', () => {
+  $message.hide();
+});
