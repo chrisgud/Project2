@@ -188,11 +188,17 @@ const updateTotalMonthlyIncome = () => {
   $('#monthly_income').val('');
 
   if (income - 1 >= 0) {
+    $message.show();
+    $comment.text('I see you, money maker!');
+    $dollar.show();
     $difference.css('color', 'green');
     $difference.html(`$${income.toFixed(2) - tot}`);
   } else {
+    $message.show();
+    $comment.text('No blank or negative paychecks!');
+    $dollar.hide();
     $difference.css('color', 'red');
-    $difference.html(`$(${income.toFixed(2) - tot})`);
+    // $difference.html(`$(${income.toFixed(2) - tot})`);
   }
 };
 
