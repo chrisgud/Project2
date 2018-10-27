@@ -2,10 +2,12 @@
 const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
 const $billInput = $('#billInput');
+// references to the modal
 const $continue = $('#continue');
 const $message = $('#modal1');
 const $comment = $('#comment');
 const $dollar = $('#dollar');
+
 const $sumBills = $('#sumOfBills');
 
 // Reference for the div containing the list of bills from the DB
