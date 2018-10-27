@@ -3,6 +3,8 @@ const $newBill = $('#newBill');
 const $newAmount = $('#newAmount');
 const $billInput = $('#billInput');
 const $sumBills = $('#sumOfBills');
+
+
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
 // references to the modal
@@ -52,7 +54,7 @@ const API = {
 const getTotalBills = () => {
   API.getTotalExpenses().then((data) => {
     const totalExpenses = data[0].total;
-    $sumBills.html(totalExpenses);
+    $sumBills.html(`$${totalExpenses}`);
   });
 };
 
@@ -178,10 +180,13 @@ function cancelEdit() {
 
 // Display the monthly income in a div
 const $monthlyIncome = $('#monthlyIncome');
-const $difference = $('#difference');
-const tot = $sumBills.innerText;
+
 const updateTotalMonthlyIncome = () => {
+  // const $difference = $('#difference');
+  const tot = $sumBills.html;
   const income = parseFloat($('#monthly_income').val().trim());
+  const $difference = $('#difference');
+
   // Add for if not a number
   const div = $('#totalMonthlyIncomeDisplay');
   div.html(`$${income.toFixed(2)}`);
@@ -193,6 +198,7 @@ const updateTotalMonthlyIncome = () => {
     $dollar.show();
     $difference.css('color', 'green');
     $difference.html(`$${income.toFixed(2) - tot}`);
+    console.log(income);
   } else {
     $message.show();
     $comment.text('No blank or negative paychecks!');
