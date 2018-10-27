@@ -5,7 +5,11 @@ const $billInput = $('#billInput');
 const $sumBills = $('#sumOfBills');
 // Reference for the div containing the list of bills from the DB
 const $billList = $('#billList');
-
+// references to the modal
+const $continue = $('#continue');
+const $message = $('#modal1');
+const $comment = $('#comment');
+const $dollar = $('#dollar');
 // The API object contains methods for each kind of request
 const API = {
   saveBill(bill) {
@@ -97,7 +101,9 @@ const handleFormSubmit = (event) => {
     value: $newAmount.val().trim(),
   };
   if (!(bill.description && bill.value)) {
-    alert('You must enter a bill and an amount!'); //eslint-disable-line
+    $message.show();
+    $comment.text('You must enter a bill and an amount!');
+    $dollar.hide();
     return;
   }
   API.saveBill(bill).then(() => {
@@ -201,3 +207,8 @@ $billInput.on('click', handleFormSubmit);
 $billList.on('click', '.delete', deleteButton);
 refreshBillList();
 console.log(tot);
+
+// button function for 'continue' button
+$continue.on('click', () => {
+  $message.hide();
+});
